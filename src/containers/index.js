@@ -1,11 +1,12 @@
-import Lobby from './Lobby'
+import Batch from './Batch'
+import BatchDetail from './BatchDetail'
 import Game from './Game'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 
 export {
-  Lobby,
-  Game,
+  Batch,
   SignIn,
   SignUp,
+  BatchDetail
 }

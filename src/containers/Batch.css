@@ -1,10 +1,10 @@
-.Lobby {
+.Batch {
   padding: 20px;
   margin: 20px auto;
   width: 80%;
 }
 
-.Lobby .paper {
+.Batch .paper {
   margin-top: 40px;
   padding: 10px;
   text-align: left;

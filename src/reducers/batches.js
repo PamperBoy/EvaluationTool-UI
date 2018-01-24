@@ -1,27 +1,27 @@
 // src/reducers/games.js
-import { FETCHED_GAMES, FETCHED_ONE_GAME } from '../actions/games/fetch'
+import { FETCHED_BATCHES, FETCHED_ONE_GAME } from '../actions/batches/fetch'
 import {
   GAME_CREATED,
   GAME_UPDATED,
   GAME_REMOVED,
-  GAME_PLAYERS_UPDATED,
-} from '../actions/games/subscribe'
+  STUDENTS_UPDATED,
+} from '../actions/batches/subscribe'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case FETCHED_GAMES :
+    case FETCHED_BATCHES :
       return [ ...payload ]
 
     case FETCHED_ONE_GAME :
-      const gameIds = state.map(g => g._id)
-      if (gameIds.indexOf(payload._id) < 0) {
+      const batchIds = state.map(batch => batch._id)
+      if (batchIds.indexOf(payload._id) < 0) {
         return [{ ...payload }].concat(state)
       }
-      return state.map((game) => {
-        if (game._id === payload._id) {
+      return state.map((batch) => {
+        if (batch._id === payload._id) {
           return { ...payload }
         }
-        return game
+        return batch
       })
 
     case GAME_CREATED :
@@ -36,7 +36,7 @@ export default (state = [], { type, payload } = {}) => {
         return game
       })
 
-    case GAME_PLAYERS_UPDATED :
+    case STUDENTS_UPDATED :
       return state.map((game) => {
         if (game._id === payload.game._id) {
           return {
