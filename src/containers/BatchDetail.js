@@ -31,11 +31,6 @@ class BatchDetail extends PureComponent {
 
     this.props.fetchStudents(batchId)
     this.props.fetchOneBatch(batchId)
-
-  }
-
-  componentDidMount() {
-    {console.log(this.pickRandom())}
   }
 
   toggleModal = () => {
