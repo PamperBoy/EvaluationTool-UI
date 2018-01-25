@@ -2,17 +2,12 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import fetchBatches, { fetchPlayers } from '../actions/batches/fetch'
+import fetchBatches from '../actions/batches/fetch'
 // import { connect as subscribeToWebsocket } from '../actions/websocket'
-import CreateGameButton from '../components/games/CreateGameButton'
 
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
-import WatchGameIcon from 'material-ui/svg-icons/image/remove-red-eye'
-import JoinGameIcon from 'material-ui/svg-icons/social/person-add'
-import PlayGameIcon from 'material-ui/svg-icons/hardware/videogame-asset'
-import WaitingIcon from 'material-ui/svg-icons/image/timelapse'
 import Divider from 'material-ui/Divider';
 
 import './Batch.css'

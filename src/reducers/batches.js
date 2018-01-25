@@ -1,5 +1,5 @@
 // src/reducers/games.js
-import { FETCHED_BATCHES, FETCHED_ONE_BATCH, FETCHED_STUDENTS } from '../actions/batches/fetch'
+import { FETCHED_BATCHES, FETCHED_ONE_BATCH } from '../actions/batches/fetch'
 import {
   GAME_CREATED,
   GAME_UPDATED,
