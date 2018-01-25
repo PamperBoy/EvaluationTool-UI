@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { fetchOneBatch } from '../actions/batches/fetch'
 import { fetchStudents } from '../actions/students/fetch'
 import RandomStudentButton from '../components/RandomStudentButton'
-import Modal from '../components/Modal';
-
+import Modal from '../components/Modal'
+import { push } from 'react-router-redux'
 
 import Paper from 'material-ui/Paper'
 
@@ -22,10 +22,14 @@ class BatchDetail extends PureComponent {
 
   componentWillMount() {
     const { batchId } = this.props.match.params
+    console.log(this.props.match.url);
 
     this.props.fetchStudents(batchId)
     this.props.fetchOneBatch(batchId)
   }
+
+  goToBatch = studentId => event => this.props.push(`${this.props.match.url}/student/${studentId}`)
+
 
   toggleModal = () => {
     this.setState({
@@ -108,14 +112,18 @@ class BatchDetail extends PureComponent {
 
         <div className="studentsContainer">
           {students && (students.map((student, index) =>
+
             <Paper
               className="paper studentItem"
               data-grade={this.giveGrade(student)}
-              key={index} >
+              key={index}
+              onClick={this.goToBatch(student._id)}
+
+              >
               <div
                 className="profileImage"
                 style={{ backgroundImage: `url(${student.profileImage})` }}></div>
-              <h3>{student.name}</h3>
+                <h3>{student.name}</h3>
             </Paper>
           ))}
         </div>
@@ -133,4 +141,4 @@ const mapStateToProps = state => ({
   students: state.students
 })
 
-export default connect(mapStateToProps, { fetchOneBatch, fetchStudents })(BatchDetail)
+export default connect(mapStateToProps, { fetchOneBatch, fetchStudents, push})(BatchDetail)
