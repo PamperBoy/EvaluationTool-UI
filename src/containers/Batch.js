@@ -1,9 +1,9 @@
-// src/containers/Lobby.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import fetchBatches from '../actions/batches/fetch'
 import authCheck from '../actions/authCheck'
+import BatchForm from './BatchForm'
 
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
@@ -16,7 +16,6 @@ class Batch extends PureComponent {
   componentWillMount() {
     this.props.fetchBatches()
     this.props.authCheck()
-
   }
 
   goToBatch = batchId => event => this.props.push(`/batch/${batchId}`)
@@ -26,14 +25,15 @@ class Batch extends PureComponent {
   }
 
   render() {
+    const {batches} = this.props
 
-    console.log(this.props);
     return (
       <div className="Batch">
-        <h1>Lobby!</h1>
+        <h1>All Batches!</h1>
+        <BatchForm nextBatchNumber={batches.length}/>
         <Paper className="paper">
           <Menu>
-            {this.props.batches && (this.props.batches.map((batch, index) =>
+            {batches && (batches.map((batch, index) =>
               <div>
               <MenuItem
                 key={index}
@@ -50,7 +50,6 @@ class Batch extends PureComponent {
   }
 }
 
-// const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
 const mapStateToProps = state => ({
   batches: state.batches
 })

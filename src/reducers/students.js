@@ -1,7 +1,7 @@
 // src/reducers/games.js
 import { FETCHED_STUDENTS } from '../actions/students/fetch'
 import {
-  GAME_CREATED,
+  BATCH_CREATED,
   GAME_UPDATED,
   GAME_REMOVED,
   STUDENTS_UPDATED,
@@ -23,10 +23,6 @@ export default (state = [], { type, payload } = {}) => {
     //     }
     //     return batch
     //   })
-
-    case GAME_CREATED :
-      const newGame = { ...payload }
-      return [newGame].concat(state)
 
     case GAME_UPDATED :
       return state.map((game) => {
