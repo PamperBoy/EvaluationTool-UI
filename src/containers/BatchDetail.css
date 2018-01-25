@@ -1,0 +1,51 @@
+.Batch {
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.Batch .paper {
+  margin-top: 40px;
+  padding: 10px;
+  text-align: left;
+}
+
+.studentsContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.studentItem {
+  width: 300px;
+  margin-right: 40px;
+  flex-shrink: 0;
+  padding: 0 !important;
+}
+
+.studentItem .profileImage {
+  height: 160px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.studentItem[data-grade='GREEN'] {
+  border-bottom: 4px solid #49b50e
+}
+.studentItem[data-grade='YELLOW'] {
+  border-bottom: 4px solid #f9d81b
+}
+.studentItem[data-grade='RED'] {
+  border-bottom: 4px solid #F2220F
+}
+
+.RandomStudentButton {
+  margin-top: 40px;
+}
+
+h3 {
+  margin: 20px;
+}

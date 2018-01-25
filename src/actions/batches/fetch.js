@@ -7,10 +7,11 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-import { STUDENTS_UPDATED } from './subscribe'
+// import { FETCHED_STUDENTS } from './subscribe'
 
 export const FETCHED_BATCHES = 'FETCHED_BATCHES'
-export const FETCHED_ONE_GAME = 'FETCHED_ONE_GAME'
+export const FETCHED_ONE_BATCH = 'FETCHED_ONE_BATCH'
+export const FETCHED_STUDENTS = 'FETCHED_STUDENTS'
 
 const api = new API()
 
@@ -38,53 +39,52 @@ export default () => {
   }
 }
 
-export const fetchStudents = (batch) => {
+export const fetchOneBatch = (batchId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/batches/${batch._id}/students`)
-      .then((result) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({ type: LOAD_SUCCESS })
+    api.get(`/batches/${batchId}`)
+    .then((result) => {
+      // console.log(result)
 
-        dispatch({
-          type: STUDENTS_UPDATED,
-          payload: {
-            batch,
-            players: result.body
-          }
-        })
+      dispatch({ type: APP_DONE_LOADING })
+      dispatch({ type: LOAD_SUCCESS })
+
+      dispatch({
+        type: FETCHED_ONE_BATCH,
+        payload: result.body
       })
-      .catch((error) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({
-          type: LOAD_ERROR,
-          payload: error.message
-        })
+    })
+    .catch((error) => {
+      dispatch({ type: APP_DONE_LOADING })
+      dispatch({
+        type: LOAD_ERROR,
+        payload: error.message
       })
+    })
   }
 }
 
-export const fetchOneGame = (gameId) => {
+export const fetchStudents = (batchId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/games/${gameId}`)
-      .then((result) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({ type: LOAD_SUCCESS })
+    api.get(`/batches/${batchId}/students`)
+    .then((result) => {
+      dispatch({ type: APP_DONE_LOADING })
+      dispatch({ type: LOAD_SUCCESS })
 
-        dispatch({
-          type: FETCHED_ONE_GAME,
-          payload: result.body
-        })
+      dispatch({
+        type: FETCHED_STUDENTS,
+        payload: result.body
       })
-      .catch((error) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({
-          type: LOAD_ERROR,
-          payload: error.message
-        })
+    })
+    .catch((error) => {
+      dispatch({ type: APP_DONE_LOADING })
+      dispatch({
+        type: LOAD_ERROR,
+        payload: error.message
       })
+    })
   }
 }

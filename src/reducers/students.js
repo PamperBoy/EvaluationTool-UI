@@ -1,5 +1,5 @@
 // src/reducers/games.js
-import { FETCHED_BATCHES, FETCHED_ONE_BATCH, FETCHED_STUDENTS } from '../actions/batches/fetch'
+import { FETCHED_STUDENTS } from '../actions/students/fetch'
 import {
   GAME_CREATED,
   GAME_UPDATED,
@@ -9,16 +9,9 @@ import {
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
-    case FETCHED_BATCHES :
-      return [ ...payload ]
 
-    case FETCHED_ONE_BATCH :
-    // console.log(state);
-    // console.log(payload);
+    case FETCHED_STUDENTS :
       return payload
-
-    // case FETCHED_STUDENTS :
-    //   return { ...{students: payload}, ...state}
     // case FETCHED_ONE_BATCH :
     //   const batchIds = state.map(batch => batch._id)
     //   if (batchIds.indexOf(payload._id) < 0) {

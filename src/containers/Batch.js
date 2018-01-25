@@ -20,24 +20,9 @@ import './Batch.css'
 class Batch extends PureComponent {
   componentWillMount() {
     this.props.fetchBatches()
-    // this.props.subscribeToWebsocket()
   }
 
   goToBatch = batchId => event => this.props.push(`/batch/${batchId}`)
-
-  // isJoinable(game) {{}
-  //   return !game.playerOneId || !game.playerTwoId
-  // }
-  //
-  // isPlayer(game) {
-  //   if (!this.props.currentUser) { return false }
-  //   return game.playerOneId === this.props.currentUser._id ||
-  //     game.playerTwoId === this.props.currentUser._id
-  // }
-  //
-  // isPlayable(game) {
-  //   return this.isPlayer(game) && !this.isJoinable(game)
-  // }
 
   renderDevider = (index) => {
     if (this.props.batches.length > index +1) { return <Divider /> }
@@ -49,7 +34,7 @@ class Batch extends PureComponent {
         <h1>Lobby!</h1>
         <Paper className="paper">
           <Menu>
-            {this.props.batches.map((batch, index) =>
+            {this.props.batches && (this.props.batches.map((batch, index) =>
               <div>
               <MenuItem
                 key={index}
@@ -58,7 +43,7 @@ class Batch extends PureComponent {
                 secondaryText={"students #"} />
               {this.renderDevider(index)}
               </div>
-            )}
+            ))}
           </Menu>
         </Paper>
       </div>
@@ -67,6 +52,7 @@ class Batch extends PureComponent {
 }
 
 // const mapStateToProps = ({ batches, currentUser }) => ({ batches, currentUser })
-const mapStateToProps = ({ batches }) => ({ batches })
-
+const mapStateToProps = state => ({
+  batches: state.batches
+})
 export default connect(mapStateToProps, { fetchBatches, push })(Batch)
