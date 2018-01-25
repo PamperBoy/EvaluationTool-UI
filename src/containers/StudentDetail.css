@@ -1,0 +1,39 @@
+.studentContainer {
+  padding: 20px;
+  margin: 20px auto;
+  width: 80%;
+}
+
+.studentsContainer .paper {
+  margin-top: 40px;
+  padding: 10px;
+  text-align: left;
+}
+
+.studentHeader .profileImage {
+  height: 400px;
+  margin: -10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.infoWrapper {
+  height: 100px;
+  padding: 30px;
+}
+
+.infoWrapper h1 {
+  line-height: 80px;
+}
+
+
+.studentHeader[data-grade='GREEN'] {
+  border-bottom: 4px solid #49b50e
+}
+.studentHeader[data-grade='YELLOW'] {
+  border-bottom: 4px solid #f9d81b
+}
+.studentHeader[data-grade='RED'] {
+  border-bottom: 4px solid #F2220F
+}
