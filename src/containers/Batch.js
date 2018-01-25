@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import fetchBatches from '../actions/batches/fetch'
-// import { connect as subscribeToWebsocket } from '../actions/websocket'
+import { connect as subscribeToWebsocket } from '../actions/websocket'
 
 import Paper from 'material-ui/Paper'
 import Menu from 'material-ui/Menu'
@@ -15,6 +15,8 @@ import './Batch.css'
 class Batch extends PureComponent {
   componentWillMount() {
     this.props.fetchBatches()
+    this.props.subscribeToWebsocket()
+
   }
 
   goToBatch = batchId => event => this.props.push(`/batch/${batchId}`)
@@ -24,6 +26,8 @@ class Batch extends PureComponent {
   }
 
   render() {
+
+    console.log(this.props);
     return (
       <div className="Batch">
         <h1>Lobby!</h1>
@@ -50,4 +54,4 @@ class Batch extends PureComponent {
 const mapStateToProps = state => ({
   batches: state.batches
 })
-export default connect(mapStateToProps, { fetchBatches, push })(Batch)
+export default connect(mapStateToProps, { fetchBatches, subscribeToWebsocket,push })(Batch)

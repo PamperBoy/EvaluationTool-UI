@@ -9,3 +9,13 @@
   padding: 10px;
   text-align: left;
 }
+
+[data-grade='GREEN'] {
+  border-bottom: 4px solid #49b50e
+}
+[data-grade='YELLOW'] {
+  border-bottom: 4px solid #f9d81b
+}
+[data-grade='RED'] {
+  border-bottom: 4px solid #F2220F
+}

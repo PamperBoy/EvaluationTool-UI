@@ -2,12 +2,15 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import { connect as subscribeToWebsocket } from '../actions/websocket'
 
 // import { fetchOneBatch } from '../actions/batches/fetch'
 import { fetchStudents } from '../actions/students/fetch'
 
 
 import Paper from 'material-ui/Paper'
+import TextField from 'material-ui/TextField';
+
 
 import './StudentDetail.css'
 
@@ -24,6 +27,8 @@ class StudentDetail extends PureComponent {
   componentWillMount() {
     const { batchId, studentId } = this.props.match.params
     this.props.fetchStudents(batchId)
+    this.props.subscribeToWebsocket()
+
   }
 
   componentDidUpdate() {
@@ -66,15 +71,37 @@ class StudentDetail extends PureComponent {
       <div className="Batch">
 
         <Paper className="paper studentHeader"
-          data-grade={this.insertAttribute()}
-          >
+          data-grade={this.insertAttribute()} >
           <div
             className="profileImage"
-            style={{ backgroundImage: `url(${currentStudent.profileImage})` }}></div>
-            <div className="infoWrapper">
-              <h1>{currentStudent.name}</h1>
-            </div>
+            style={{ backgroundImage: `url(${currentStudent.profileImage})` }}>
+          </div>
+
+          <div className="infoWrapper">
+            <h1>{currentStudent.name}</h1>
+          </div>
         </Paper>
+
+        <div className="studentsContainer">
+          {updated && (currentStudent.evaluations.map((evaluation, index) =>
+
+            <Paper
+              className="paper evaluationItem"
+              data-grade={evaluation.evaluationGrade}
+              key={index}
+              >
+              <h3>{evaluation.evaluationDate}</h3>
+              <TextField
+                hintText="Full width"
+                fullWidth={true}
+                multiLine={true}
+                rows={5}
+                rowsMax={10}
+                defaultValue={evaluation.evaluationRemark}
+              />
+            </Paper>
+          ))}
+        </div>
 
       </div>
     )
@@ -85,4 +112,4 @@ const mapStateToProps = state => ({
   students: state.students
 })
 
-export default connect(mapStateToProps, {fetchStudents})(StudentDetail)
+export default connect(mapStateToProps, {fetchStudents, subscribeToWebsocket})(StudentDetail)

@@ -1,4 +1,3 @@
-// src/containers/Lobby.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { fetchOneBatch } from '../actions/batches/fetch'
@@ -6,6 +5,8 @@ import { fetchStudents } from '../actions/students/fetch'
 import RandomStudentButton from '../components/RandomStudentButton'
 import Modal from '../components/Modal'
 import { push } from 'react-router-redux'
+import { connect as subscribeToWebsocket } from '../actions/websocket'
+
 
 import Paper from 'material-ui/Paper'
 
@@ -26,6 +27,7 @@ class BatchDetail extends PureComponent {
 
     this.props.fetchStudents(batchId)
     this.props.fetchOneBatch(batchId)
+    this.props.subscribeToWebsocket()
   }
 
   goToBatch = studentId => event => this.props.push(`${this.props.match.url}/student/${studentId}`)
@@ -141,4 +143,4 @@ const mapStateToProps = state => ({
   students: state.students
 })
 
-export default connect(mapStateToProps, { fetchOneBatch, fetchStudents, push})(BatchDetail)
+export default connect(mapStateToProps, { fetchOneBatch, fetchStudents, subscribeToWebsocket, push})(BatchDetail)

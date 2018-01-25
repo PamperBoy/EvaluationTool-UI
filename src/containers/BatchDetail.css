@@ -31,16 +31,6 @@
   background-size: cover;
 }
 
-.studentItem[data-grade='GREEN'] {
-  border-bottom: 4px solid #49b50e
-}
-.studentItem[data-grade='YELLOW'] {
-  border-bottom: 4px solid #f9d81b
-}
-.studentItem[data-grade='RED'] {
-  border-bottom: 4px solid #F2220F
-}
-
 .RandomStudentButton {
   margin-top: 40px;
 }
