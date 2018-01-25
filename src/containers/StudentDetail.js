@@ -12,20 +12,45 @@ import Paper from 'material-ui/Paper'
 import './BatchDetail.css'
 
 class StudentDetail extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = { currentStudent: {},
+                   nextStudent: {}
+                 }
+  }
 
   componentWillMount() {
-    const { batchId } = this.props.match.params
+    const { batchId, studentId } = this.props.match.params
     this.props.fetchStudents(batchId)
   }
 
+  componentDidUpdate() {
+    this.setStudentStates(this.findStudentIndex())
+  }
+
+
+  findStudentIndex = () => {
+      let index = this.props.students.findIndex(student => student._id === this.props.match.params.studentId);
+      return index
+  }
+
+  setStudentStates = (index) => {
+    this.setState({
+      currentStudent: this.props.students[index],
+      nextStudent: this.props.students[
+        index === this.props.students.length -1 ? 0 : index + 1
+      ]
+    })
+  }
 
   render() {
-    console.log("hoi");
+    const { currentStudent, nextStudent } = this.state
     return (
       <div className="Batch">
 
         <Paper className="paper">
-          <h4>student</h4>
+          <h4>{currentStudent.name}</h4>
         </Paper>
 
       </div>
