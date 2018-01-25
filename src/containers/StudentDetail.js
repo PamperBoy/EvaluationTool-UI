@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { connect as subscribeToWebsocket } from '../actions/websocket'
+import authCheck from '../actions/authCheck'
 
 // import { fetchOneBatch } from '../actions/batches/fetch'
 import { fetchStudents } from '../actions/students/fetch'
@@ -27,7 +27,7 @@ class StudentDetail extends PureComponent {
   componentWillMount() {
     const { batchId, studentId } = this.props.match.params
     this.props.fetchStudents(batchId)
-    this.props.subscribeToWebsocket()
+    this.props.authCheck()
 
   }
 
@@ -112,4 +112,4 @@ const mapStateToProps = state => ({
   students: state.students
 })
 
-export default connect(mapStateToProps, {fetchStudents, subscribeToWebsocket})(StudentDetail)
+export default connect(mapStateToProps, {fetchStudents, authCheck})(StudentDetail)
