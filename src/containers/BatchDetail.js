@@ -36,20 +36,32 @@ class BatchDetail extends PureComponent {
     }
   }
 
+  studentFilter = (student, grade) => {
+    if (student.evaluations.length > 0) {
+      return student.evaluations[0].evaluationGrade === grade
+    }
+  }
+  // filtered is [12, 130, 44]
+
   render() {
-    // console.log(this.props);
+    const {batches, students } = this.props
+
+    const green = students.filter(student => this.studentFilter(student, "GREEN"));
     return (
       <div className="Batch">
         <Paper className="paper">
-          <h1>Batch {this.props.batches.batchNumber}</h1>
-          <h4>{this.props.students.length} students</h4>
+          <h1>Batch {batches.batchNumber}</h1>
+          <h4>{students.length} students</h4>
         </Paper>
-
+        {console.log(green)}
         <RandomStudentButton />
 
         <div className="studentsContainer">
-          {this.props.students && (this.props.students.map((student, index) =>
-            <Paper className="paper studentItem" data-grade={this.giveGrade(student)}>
+          {students && (students.map((student, index) =>
+            <Paper
+              className="paper studentItem"
+              data-grade={this.giveGrade(student)}
+              key={index} >
               <div
                 className="profileImage"
                 style={{ backgroundImage: `url(${student.profileImage})` }}></div>
