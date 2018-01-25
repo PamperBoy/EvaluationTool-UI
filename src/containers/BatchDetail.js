@@ -27,6 +27,10 @@ class BatchDetail extends PureComponent {
 
   }
 
+  componentDidMount() {
+    {console.log(this.pickRandom())}
+  }
+
   giveGrade = (student) => {
     // console.log(student.evaluations[0].evaluationGrade)
     if (student.evaluations.length > 0) {
@@ -44,6 +48,21 @@ class BatchDetail extends PureComponent {
     })
   }
 
+  pickRandom = () => {
+    let randomNumber = Math.floor(Math.random() * 100) + 1
+    const chanceGreen = 21
+    const chanceYellow = chanceGreen + 32
+
+    console.log(randomNumber);
+    if (randomNumber < chanceGreen) {
+      return "green"
+    } else if (randomNumber < chanceYellow) {
+      return "yellow"
+    } else {
+      return "red"
+    }
+  }
+
   render() {
     const {batches, students } = this.props
 
@@ -52,14 +71,14 @@ class BatchDetail extends PureComponent {
       yellow: this.studentFilter(students, "YELLOW"),
       red: this.studentFilter(students, "RED")
     }
-    
+
     return (
       <div className="Batch">
         <Paper className="paper">
           <h1>Batch {batches.batchNumber}</h1>
           <h4>{students.length} students</h4>
         </Paper>
-        {console.log(filteredStudents)}
+
         <RandomStudentButton />
 
         <div className="studentsContainer">
