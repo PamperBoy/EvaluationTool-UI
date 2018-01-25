@@ -1,0 +1,47 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 50px;
+}
+
+.modal {
+  max-width: 500px;
+  min-height: 300px;
+  margin: auto;
+  margin-top: 200px;
+  padding: 30px;
+  position: relative;
+}
+
+.modalClose {
+  cursor: pointer;
+  height: 30px !important;
+  width: 30px !important;
+  display: block !important;
+  right: 10px;
+  top: 10px;
+  position: absolute !important;
+}
+
+.modal .profileImage {
+  height: 300px;
+  margin: -30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.footer {
+  height: 100px;
+}
+
+.modalTitle {
+  line-height: 160px;
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
