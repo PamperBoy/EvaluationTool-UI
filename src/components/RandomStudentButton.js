@@ -11,7 +11,7 @@ class RandomStudentButton extends PureComponent {
       <div className="RandomStudentButton">
         <RaisedButton
           label="Get random student"
-          primary={true}
+          primary={false}
           fullWidth={true}
           onClick={this.props.onClick}
            />

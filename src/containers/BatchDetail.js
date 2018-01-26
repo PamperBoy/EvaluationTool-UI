@@ -6,6 +6,7 @@ import RandomStudentButton from '../components/RandomStudentButton'
 import Modal from '../components/Modal'
 import { push } from 'react-router-redux'
 import authCheck from '../actions/authCheck'
+import StudentForm from './StudentForm'
 
 
 import Paper from 'material-ui/Paper'
@@ -23,11 +24,15 @@ class BatchDetail extends PureComponent {
 
   componentWillMount() {
     const { batchId } = this.props.match.params
-    console.log(this.props.match.url);
 
     this.props.fetchStudents(batchId)
     this.props.fetchOneBatch(batchId)
     this.props.authCheck()
+  }
+
+  componentDidUpdate() {
+    console.log("asdasd");
+    console.log(this.props);
   }
 
   goToBatch = studentId => event => this.props.push(`${this.props.match.url}/student/${studentId}`)
@@ -46,7 +51,7 @@ class BatchDetail extends PureComponent {
   }
 
   giveGrade = (student) => {
-    if (student.evaluations.length > 0) {
+    if (!student.evaluations == undefined && student.evaluations.length > 0) {
       return student.evaluations[0].evaluationGrade
     } else {
       return "NOGRADE"
@@ -100,15 +105,16 @@ class BatchDetail extends PureComponent {
   }
 
   render() {
-    const {batches, students } = this.props
+    const { batches, students } = this.props
 
     return (
       <div className="Batch">
 
-        <Paper className="paper">
+        <Paper className="paper" zDepth={4} style={{marginBottom: 40}}>
           <h1>Batch {batches.batchNumber}</h1>
           <h4>{students.length} students</h4>
         </Paper>
+        <StudentForm batchId={this.props.match.params.batchId}/>
 
         <RandomStudentButton onClick={() => {this.pickRandom(students), this.toggleModal()}} />
 
@@ -120,7 +126,6 @@ class BatchDetail extends PureComponent {
               data-grade={this.giveGrade(student)}
               key={index}
               onClick={this.goToBatch(student._id)}
-
               >
               <div
                 className="profileImage"

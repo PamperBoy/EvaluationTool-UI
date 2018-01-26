@@ -29,7 +29,6 @@ class Batch extends PureComponent {
 
     return (
       <div className="Batch">
-        <h1>All Batches!</h1>
         <BatchForm nextBatchNumber={batches.length}/>
         <Paper className="paper">
           <Menu>

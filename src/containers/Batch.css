@@ -19,3 +19,8 @@
 [data-grade='RED'] {
   border-bottom: 4px solid #F2220F
 }
+
+[role='presentation'] {
+  width: 100% !important;
+  margin: -10px;
+}

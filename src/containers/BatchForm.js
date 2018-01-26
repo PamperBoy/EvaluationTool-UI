@@ -43,8 +43,8 @@ class BatchForm extends PureComponent {
 
 render() {
   return (
-    <Paper className="paperForm" zDepth={4}>
-
+    <Paper className="paperForm" zDepth={2}>
+      <h2>Create a batch</h2>
       <form
       className="batchForm"
       onSubmit={this.saveBatch.bind(this)}>

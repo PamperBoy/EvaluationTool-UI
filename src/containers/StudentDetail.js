@@ -60,9 +60,11 @@ class StudentDetail extends PureComponent {
   }
 
   insertAttribute = () => {
-    if (this.state.updated) {
-      return this.state.currentStudent.evaluations[0].evaluationGrade
+    let evaluations = this.state.currentStudent.evaluations
+    if (this.state.updated && evaluations.length > 0) {
+      return evaluations[0].evaluationGrade
     }
+    return "NOGRADE"
   }
 
   render() {

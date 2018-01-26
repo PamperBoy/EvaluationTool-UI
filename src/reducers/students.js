@@ -7,6 +7,8 @@ import {
   STUDENTS_UPDATED,
 } from '../actions/batches/subscribe'
 
+import { STUDENT_CREATED } from '../actions/students/create'
+
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
 
@@ -23,6 +25,10 @@ export default (state = [], { type, payload } = {}) => {
     //     }
     //     return batch
     //   })
+
+    case STUDENT_CREATED :
+      const newStudent = { ...payload }
+      return [newStudent].concat(state)
 
     case GAME_UPDATED :
       return state.map((game) => {
