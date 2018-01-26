@@ -28,11 +28,11 @@ class BatchForm extends PureComponent {
     })
   }
 
-  updateStartDate= (event, date) => {
+  updateStartDate = (event, date) => {
     this.setState({startDate: date})
   }
 
-  updateEndDate= (event, date) => {
+  updateEndDate = (event, date) => {
     this.setState({endDate: date})
   }
 

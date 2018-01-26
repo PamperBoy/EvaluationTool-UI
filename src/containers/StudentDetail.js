@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authCheck from '../actions/authCheck'
+import EvaluationForm from './EvaluationForm'
 
 // import { fetchOneBatch } from '../actions/batches/fetch'
 import { fetchStudents } from '../actions/students/fetch'
@@ -84,7 +85,9 @@ class StudentDetail extends PureComponent {
           </div>
         </Paper>
 
-        <div className="studentsContainer">
+        <EvaluationForm />
+
+        <div className="evaluationsContainer">
           {updated && (currentStudent.evaluations.map((evaluation, index) =>
 
             <Paper
