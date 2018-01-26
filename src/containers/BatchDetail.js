@@ -18,7 +18,8 @@ class BatchDetail extends PureComponent {
     super(props);
 
     this.state = { isOpen: false,
-                   randomStudent: {}
+                   randomStudent: {},
+                   batchNumber: ""
                  }
   }
 
@@ -31,12 +32,14 @@ class BatchDetail extends PureComponent {
   }
 
   componentDidUpdate() {
-    console.log("asdasd");
-    console.log(this.props);
+    this.setState({
+      batchNumber: this.props.batches.length
+    })
   }
 
-  goToBatch = studentId => event => this.props.push(`${this.props.match.url}/student/${studentId}`)
-
+  goToBatch = studentId => event => {
+    this.props.push(`${this.props.match.url}/student/${studentId}`)
+  }
 
   toggleModal = () => {
     this.setState({
@@ -51,7 +54,7 @@ class BatchDetail extends PureComponent {
   }
 
   giveGrade = (student) => {
-    if (!student.evaluations == undefined && student.evaluations.length > 0) {
+    if (student.evaluations && student.evaluations.length > 0) {
       return student.evaluations[0].evaluationGrade
     } else {
       return "NOGRADE"
@@ -66,39 +69,31 @@ class BatchDetail extends PureComponent {
     })
   }
 
-  pools = (students) => {
-    return {
-      green: this.studentFilter(students, "GREEN"),
-      yellow: this.studentFilter(students, "YELLOW"),
-      red: this.studentFilter(students, "RED")
-    }
-  }
-
   pickRandom = (students) => {
     if (students) {
 
       let randomNumber = Math.floor(Math.random() * 100) + 1
       const chanceGreen = 21
-      const chanceYellow = chanceGreen + 32
+      const chanceYellow = chanceGreen + 32 // 53
+
+      const greenPool =   this.studentFilter(students, "GREEN")
+      const yellowPool = this.studentFilter(students, "YELLOW")
+      const redPool = this.studentFilter(students, "RED")
 
       const randomStudentNumber = (poolLength) => {
         return Math.floor(Math.random() * poolLength.length)
       }
 
-      const green =   this.studentFilter(students, "GREEN")
-      const yellow = this.studentFilter(students, "YELLOW")
-      const red = this.studentFilter(students, "RED")
-
       if (randomNumber <= chanceGreen) {
-        let student = green[randomStudentNumber(green)]
+        let student = greenPool[randomStudentNumber(greenPool)]
         this.setRandomStudent(student)
 
       } else if (randomNumber <= chanceYellow) {
-        let student = yellow[randomStudentNumber(yellow)]
+        let student = yellowPool[randomStudentNumber(yellowPool)]
         this.setRandomStudent(student)
 
       } else {
-        let student = red[randomStudentNumber(red)]
+        let student = redPool[randomStudentNumber(redPool)]
         this.setRandomStudent(student)
       }
     }
@@ -111,16 +106,18 @@ class BatchDetail extends PureComponent {
       <div className="Batch">
 
         <Paper className="paper" zDepth={4} style={{marginBottom: 40}}>
-          <h1>Batch {batches.batchNumber}</h1>
+          <h1>Batch {this.state.batchNumber}</h1>
           <h4>{students.length} students</h4>
         </Paper>
+
         <StudentForm batchId={this.props.match.params.batchId}/>
 
-        <RandomStudentButton onClick={() => {this.pickRandom(students), this.toggleModal()}} />
+        <RandomStudentButton onClick={
+            () => { this.pickRandom(students), this.toggleModal() }
+          } />
 
         <div className="studentsContainer">
           {students && (students.map((student, index) =>
-
             <Paper
               className="paper studentItem"
               data-grade={this.giveGrade(student)}
@@ -129,11 +126,14 @@ class BatchDetail extends PureComponent {
               >
               <div
                 className="profileImage"
-                style={{ backgroundImage: `url(${student.profileImage})` }}></div>
-                <h3>{student.name}</h3>
+                style={{ backgroundImage: `url(${student.profileImage})` }}>
+              </div>
+
+              <h3>{student.name}</h3>
             </Paper>
           ))}
         </div>
+
         <Modal show={this.state.isOpen}
           onClose={this.toggleModal}
           student={this.state.randomStudent}

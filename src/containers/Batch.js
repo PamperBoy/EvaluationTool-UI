@@ -33,7 +33,7 @@ class Batch extends PureComponent {
         <Paper className="paper">
           <Menu>
             {batches && (batches.map((batch, index) =>
-              <div>
+              <div key={index}>
               <MenuItem
                 key={index}
                 onClick={this.goToBatch(batch._id)}

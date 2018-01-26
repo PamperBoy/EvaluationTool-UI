@@ -20,7 +20,9 @@ class Modal extends React.Component {
           className="profileImage"
           style={{ backgroundImage: `url(${this.props.student.profileImage})` }}>
           </div>
-          <CloseIcon className="modalClose"onClick={this.props.onClose} />
+          <CloseIcon
+            className="modalClose"
+            onClick={this.props.onClose} />
           <div className="footer">
             <h2 className="modalTitle">{this.props.student.name}</h2>
           </div>

@@ -26,7 +26,7 @@ class StudentDetail extends PureComponent {
   }
 
   componentWillMount() {
-    const { batchId, studentId } = this.props.match.params
+    const { batchId } = this.props.match.params
     this.props.fetchStudents(batchId)
     this.props.authCheck()
 
@@ -71,6 +71,8 @@ class StudentDetail extends PureComponent {
 
   render() {
     const { currentStudent, nextStudent, updated } = this.state
+    const { batchId, studentId } = this.props.match.params
+
     return (
       <div className="Batch">
 
@@ -86,7 +88,11 @@ class StudentDetail extends PureComponent {
           </div>
         </Paper>
 
-        <EvaluationForm nextStudent={this.goToStudent(this.state.nextStudent._id)}/>
+        <EvaluationForm
+          nextStudent={this.goToStudent(this.state.nextStudent._id)}
+          studentId={studentId}
+          batchId={batchId}
+          />
 
         <div className="evaluationsContainer">
           {updated && (currentStudent.evaluations.map((evaluation, index) =>

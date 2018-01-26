@@ -26,10 +26,12 @@ class EvaluationForm extends PureComponent {
     this.setState({evaluationDate: date})
   }
 
-  updateEvaluationGrade(event) {
+  updateEvaluationGrade(color) {
     this.setState({
-      evaluationGrade: event.target.value
+      evaluationGrade: color
     })
+
+    console.log(color);
   }
 
   updateEvaluationRemark(event) {
@@ -39,23 +41,53 @@ class EvaluationForm extends PureComponent {
   }
 
   saveEvaluation() {
+    const { batchId, studentId } = this.props
+
+    const evaluation = { ...this.state }
+    this.props.createEvaluation(batchId, studentId, evaluation)
+  }
+
+  saveEvaluationAndNext() {
+    // const { batchId, studentId } = this.props
+
     // const evaluation = { ...this.state }
-    // this.props.createBatch(evaluation)
+    // this.props.createEvaluation(batchId, studentId, evaluation)
     this.props.nextStudent()
   }
 
   render() {
     return (
       <Paper className="paperForm addTopMargin" zDepth={2}>
-        <h2>Create a batch</h2>
+        <h2>Add evaluation</h2>
         <form
         className="evaluationForm"
         onSubmit={this.saveEvaluation.bind(this)}>
 
+          <div className="gradeButtons">
+            <RaisedButton
+              backgroundColor="#49b50e"
+              style={{marginRight: 20}}
+              primary={false}
+              onClick={() => this.updateEvaluationGrade("GREEN")}
+              label="green"/>
+            <RaisedButton
+              backgroundColor="#f9d81b"
+              style={{marginRight: 20}}
+              primary={false}
+              onClick={() => this.updateEvaluationGrade("YELLOW")}
+              label="yellow"/>
+            <RaisedButton
+              backgroundColor="rgb(211, 47, 47)"
+              style={{marginRight: 20}}
+              primary={false}
+              onClick={() => this.updateEvaluationGrade("RED")}
+              label="red"/>
+          </div>
+
           <DatePicker
             textFieldStyle={{width: `100%`}}
             className="input evaluationDate"
-            hintText="Start date"
+            hintText="Evaluation date"
             ref="evaluationDate"
             defaultValue={this.state.evaluationDate}
             value={this.state.evaluationDate}
@@ -64,12 +96,12 @@ class EvaluationForm extends PureComponent {
             />
 
           <TextField
-            textFieldStyle={{width: `100%`}}
-            className="input batchNumber"
-            type="text"
-            ref="batchNumber"
-            hintText="Batch Number"
-            defaultValue={this.props.nextBatchNumber}
+            hintText="Add a remark"
+            fullWidth={true}
+            multiLine={true}
+            rows={5}
+            rowsMax={10}
+            defaultValue={this.state.evaluationRemark}
             onChange={this.updateEvaluationRemark.bind(this)}
             onKeyDown={this.updateEvaluationRemark.bind(this)}
           />
@@ -83,7 +115,7 @@ class EvaluationForm extends PureComponent {
 
             <RaisedButton
               primary={true}
-              onClick={this.saveEvaluation.bind(this)}
+              onClick={this.saveEvaluationAndNext.bind(this)}
               label="Save and next"/>
           </div>
         </form>
