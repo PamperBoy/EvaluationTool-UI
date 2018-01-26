@@ -36,6 +36,7 @@ class StudentDetail extends PureComponent {
     this.setStudentStates(this.findStudentIndex())
   }
 
+  goToStudent = studentId => event => this.props.push(`${studentId}`)
 
   findStudentIndex = () => {
       let index = this.props.students.findIndex(student => student._id === this.props.match.params.studentId);
@@ -85,7 +86,7 @@ class StudentDetail extends PureComponent {
           </div>
         </Paper>
 
-        <EvaluationForm />
+        <EvaluationForm nextStudent={this.goToStudent(this.state.nextStudent._id)}/>
 
         <div className="evaluationsContainer">
           {updated && (currentStudent.evaluations.map((evaluation, index) =>
@@ -117,4 +118,4 @@ const mapStateToProps = state => ({
   students: state.students
 })
 
-export default connect(mapStateToProps, {fetchStudents, authCheck})(StudentDetail)
+export default connect(mapStateToProps, {fetchStudents, authCheck, push})(StudentDetail)
