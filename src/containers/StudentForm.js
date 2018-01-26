@@ -7,7 +7,7 @@ import DatePicker from 'material-ui/DatePicker'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
-import './BatchForm.css'
+import './StudentForm.css'
 
 class StudentForm extends PureComponent {
   constructor(props) {

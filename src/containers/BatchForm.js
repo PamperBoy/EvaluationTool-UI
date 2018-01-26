@@ -55,7 +55,6 @@ render() {
           type="text"
           ref="batchNumber"
           hintText="Batch Number"
-          defaultValue={this.props.nextBatchNumber}
           onChange={this.updateBatchNumber.bind(this)}
           onKeyDown={this.updateBatchNumber.bind(this)}
         />

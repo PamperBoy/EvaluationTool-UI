@@ -73,16 +73,22 @@ class BatchDetail extends PureComponent {
     if (students) {
 
       let randomNumber = Math.floor(Math.random() * 100) + 1
+      console.log(randomNumber);
       const chanceGreen = 21
       const chanceYellow = chanceGreen + 32 // 53
 
-      const greenPool =   this.studentFilter(students, "GREEN")
-      const yellowPool = this.studentFilter(students, "YELLOW")
-      const redPool = this.studentFilter(students, "RED")
+      let greenPool = this.studentFilter(students, "GREEN")
+      let yellowPool = this.studentFilter(students, "YELLOW")
+      let redPool = this.studentFilter(students, "RED")
+
+      greenPool.length === 0 ? greenPool = yellowPool :null
+      yellowPool.length === 0 ? yellowPool = redPool : null
+      redPool.length === 0 ? redPool = greenPool : null
 
       const randomStudentNumber = (poolLength) => {
         return Math.floor(Math.random() * poolLength.length)
       }
+
 
       if (randomNumber <= chanceGreen) {
         let student = greenPool[randomStudentNumber(greenPool)]
