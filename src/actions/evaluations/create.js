@@ -6,18 +6,18 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-const BATCH_CREATED = 'BATCH_CREATED'
+export const EVALUATION_CREATED = 'EVALUATION_CREATED'
 
 
 const api = new API()
 
-export default (newBatch) => {
+export default (batchId, studentId, newEvaluation) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    api.post('/batches', newBatch)
-      .then((batch) => {
-        dispatch({ type: BATCH_CREATED, payload: batch.body })
+    api.post(`/batches/${batchId}/students/${studentId}/evaluations`, newEvaluation)
+      .then((evaluation) => {
+        dispatch({ type: EVALUATION_CREATED, payload: evaluation.body })
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
       })

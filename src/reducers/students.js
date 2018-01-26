@@ -1,11 +1,7 @@
 // src/reducers/games.js
 import { FETCHED_STUDENTS } from '../actions/students/fetch'
-import {
-  GAME_CREATED,
-  GAME_UPDATED,
-  GAME_REMOVED,
-  STUDENTS_UPDATED,
-} from '../actions/batches/subscribe'
+
+import { STUDENT_CREATED } from '../actions/students/create'
 
 export default (state = [], { type, payload } = {}) => {
   switch (type) {
@@ -24,30 +20,9 @@ export default (state = [], { type, payload } = {}) => {
     //     return batch
     //   })
 
-    case GAME_CREATED :
-      const newGame = { ...payload }
-      return [newGame].concat(state)
-
-    case GAME_UPDATED :
-      return state.map((game) => {
-        if (game._id === payload._id) {
-          return { ...payload }
-        }
-        return game
-      })
-
-    case STUDENTS_UPDATED :
-      return state.map((batch) => {
-        if (batch._id === payload.batch._id) {
-          return {
-            ...payload
-          }
-        }
-        return batch
-      })
-
-    case GAME_REMOVED :
-        return state.filter((game) => (game._id !== payload._id))
+    case STUDENT_CREATED :
+      const newStudent = { ...payload }
+      return [newStudent].concat(state)
 
     default :
       return state

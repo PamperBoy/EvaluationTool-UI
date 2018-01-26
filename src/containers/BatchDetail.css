@@ -12,15 +12,18 @@
 
 .studentsContainer {
   display: flex;
-  width: 100%;
+  width: calc(100% + 40px);
   flex-direction: row;
   flex-wrap: wrap;
+  /* margin:0; */
+
 }
 
 .studentItem {
   width: 300px;
   margin-right: 40px;
   flex-shrink: 0;
+  flex-grow: 1;
 }
 
 .studentItem .profileImage {
@@ -29,16 +32,6 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-}
-
-.studentItem[data-grade='GREEN'] {
-  border-bottom: 4px solid #49b50e
-}
-.studentItem[data-grade='YELLOW'] {
-  border-bottom: 4px solid #f9d81b
-}
-.studentItem[data-grade='RED'] {
-  border-bottom: 4px solid #F2220F
 }
 
 .RandomStudentButton {
