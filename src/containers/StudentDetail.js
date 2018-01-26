@@ -4,14 +4,10 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import authCheck from '../actions/authCheck'
 import EvaluationForm from './EvaluationForm'
-
-// import { fetchOneBatch } from '../actions/batches/fetch'
 import { fetchStudents } from '../actions/students/fetch'
-
 
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField';
-
 
 import './StudentDetail.css'
 
@@ -29,7 +25,6 @@ class StudentDetail extends PureComponent {
     const { batchId } = this.props.match.params
     this.props.fetchStudents(batchId)
     this.props.authCheck()
-
   }
 
   componentDidUpdate() {
@@ -77,7 +72,9 @@ class StudentDetail extends PureComponent {
       <div className="Batch">
 
         <Paper className="paper studentHeader"
-          data-grade={this.insertAttribute()} >
+          data-grade={this.insertAttribute()}
+          >
+
           <div
             className="profileImage"
             style={{ backgroundImage: `url(${currentStudent.profileImage})` }}>
@@ -86,13 +83,14 @@ class StudentDetail extends PureComponent {
           <div className="infoWrapper">
             <h1>{currentStudent.name}</h1>
           </div>
+
         </Paper>
 
         <EvaluationForm
           nextStudent={this.goToStudent(this.state.nextStudent._id)}
           studentId={studentId}
           batchId={batchId}
-          />
+        />
 
         <div className="evaluationsContainer">
           {updated && (currentStudent.evaluations.map((evaluation, index) =>
@@ -109,12 +107,12 @@ class StudentDetail extends PureComponent {
                 multiLine={true}
                 rows={5}
                 rowsMax={10}
-                defaultValue={evaluation.evaluationRemark}
+                value={evaluation.evaluationRemark}
               />
             </Paper>
+
           ))}
         </div>
-
       </div>
     )
   }

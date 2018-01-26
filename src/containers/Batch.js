@@ -18,10 +18,12 @@ class Batch extends PureComponent {
     this.props.authCheck()
   }
 
-  goToBatch = batchId => event => this.props.push(`/batch/${batchId}`)
+  goToBatch = batchId => event => {
+    this.props.push(`/batch/${batchId}`)
+  }
 
   renderDevider = (index) => {
-    if (this.props.batches.length > index +1) { return <Divider /> }
+    if (this.props.batches.length > index + 1) { return <Divider /> }
   }
 
   render() {
@@ -32,16 +34,19 @@ class Batch extends PureComponent {
         <BatchForm nextBatchNumber={batches.length}/>
         <Paper className="paper">
           <Menu>
+
             {batches && (batches.map((batch, index) =>
               <div key={index}>
-              <MenuItem
-                key={index}
-                onClick={this.goToBatch(batch._id)}
-                primaryText={`Batch ${batch.batchNumber}`}
-                secondaryText={"students #"} />
-              {this.renderDevider(index)}
+                <MenuItem
+                  key={index}
+                  onClick={this.goToBatch(batch._id)}
+                  primaryText={`Batch ${batch.batchNumber}`}
+                  secondaryText={"students #"}
+                />
+                {this.renderDevider(index)}
               </div>
             ))}
+
           </Menu>
         </Paper>
       </div>
@@ -52,4 +57,4 @@ class Batch extends PureComponent {
 const mapStateToProps = state => ({
   batches: state.batches
 })
-export default connect(mapStateToProps, { fetchBatches, authCheck,push })(Batch)
+export default connect(mapStateToProps, { fetchBatches, authCheck, push })(Batch)
